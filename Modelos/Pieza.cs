@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 
 #nullable disable
 
-namespace webAPI.Modelos
+namespace AccesoriosArgentinos.Modelos
 {
     public partial class Pieza
     {
@@ -12,7 +14,7 @@ namespace webAPI.Modelos
             MaterialPiezas = new HashSet<MaterialPieza>();
             OrdenesProduccionDetalles = new HashSet<OrdenesProduccionDetalle>();
         }
-
+        [Key]
         public int Codigo { get; set; }
         public int? MarcaId { get; set; }
         public string Descripcion { get; set; }

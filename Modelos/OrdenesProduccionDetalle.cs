@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
-namespace webAPI.Modelos
+namespace AccesoriosArgentinos.Modelos
 {
     public partial class OrdenesProduccionDetalle
     {
@@ -19,6 +21,7 @@ namespace webAPI.Modelos
         public virtual EstadosProduccion Estado { get; set; }
         public virtual Matrix Matriz { get; set; }
         public virtual Operario Operario { get; set; }
+        [ForeignKey("OrdenProduccionCabecera_Id")]
         public virtual OrdenesProduccionCabecera OrdenProduccionCabecera { get; set; }
         public virtual Pieza PiezaCodigoNavigation { get; set; }
     }

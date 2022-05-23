@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace webAPI.Modelos
+namespace AccesoriosArgentinos.Modelos
 {
     public partial class AccesoriosDbContext : DbContext
     {
@@ -15,6 +15,7 @@ namespace webAPI.Modelos
         public AccesoriosDbContext(DbContextOptions<AccesoriosDbContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public virtual DbSet<Book> Books { get; set; }
@@ -34,123 +35,17 @@ namespace webAPI.Modelos
         {
             if (!optionsBuilder.IsConfigured)
             {
-              }
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
+            /*clave compuesta*/
+            modelBuilder.Entity<MaterialPieza>()
+                .HasKey(c => new { c.PiezaId, c.MaterialId });
 
-            modelBuilder.Entity<EstadosProduccion>(entity =>
-            {
-                entity.ToTable("EstadosProduccion");
-            });
-
-            modelBuilder.Entity<MaterialPieza>(entity =>
-            {
-                entity.HasKey(e => new { e.MaterialId, e.PiezaId });
-
-                entity.ToTable("MaterialPieza");
-
-                entity.HasOne(d => d.Material)
-                    .WithMany(p => p.MaterialPiezas)
-                    .HasForeignKey(d => d.MaterialId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MaterialPieza_Materiales");
-
-                entity.HasOne(d => d.Pieza)
-                    .WithMany(p => p.MaterialPiezas)
-                    .HasForeignKey(d => d.PiezaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MaterialPieza_Piezas");
-            });
-
-            modelBuilder.Entity<Matrix>(entity =>
-            {
-                entity.HasIndex(e => e.DepositoId, "IX_Matrices_DepositoId");
-
-                entity.HasOne(d => d.Deposito)
-                    .WithMany(p => p.Matrices)
-                    .HasForeignKey(d => d.DepositoId);
-            });
-
-            modelBuilder.Entity<OrdenesProduccionCabecera>(entity =>
-            {
-                entity.ToTable("OrdenesProduccionCabecera");
-
-                entity.HasIndex(e => e.InyectoraId, "IX_OrdenesProduccionCabecera_InyectoraId");
-
-                entity.HasOne(d => d.Inyectora)
-                    .WithMany(p => p.OrdenesProduccionCabeceras)
-                    .HasForeignKey(d => d.InyectoraId);
-            });
-
-            modelBuilder.Entity<OrdenesProduccionDetalle>(entity =>
-            {
-                entity.HasKey(e => new { e.PiezaCodigo, e.OrdenProduccionCabeceraId })
-                    .HasName("PK_OrdenesProduccionDetalle_1");
-
-                entity.ToTable("OrdenesProduccionDetalle");
-
-                entity.HasIndex(e => e.EstadoId, "IX_OrdenesProduccionDetalle_EstadoId");
-
-                entity.HasIndex(e => e.MatrizId, "IX_OrdenesProduccionDetalle_MatrizId");
-
-                entity.HasIndex(e => e.OperarioId, "IX_OrdenesProduccionDetalle_OperarioId");
-
-                entity.HasIndex(e => e.OrdenProduccionCabeceraId, "IX_OrdenesProduccionDetalle_OrdenProduccionCabeceraId");
-
-                entity.HasIndex(e => e.PiezaCodigo, "IX_OrdenesProduccionDetalle_PiezaCodigo");
-
-                entity.HasOne(d => d.Estado)
-                    .WithMany(p => p.OrdenesProduccionDetalles)
-                    .HasForeignKey(d => d.EstadoId);
-
-                entity.HasOne(d => d.Matriz)
-                    .WithMany(p => p.OrdenesProduccionDetalles)
-                    .HasForeignKey(d => d.MatrizId);
-
-                entity.HasOne(d => d.Operario)
-                    .WithMany(p => p.OrdenesProduccionDetalles)
-                    .HasForeignKey(d => d.OperarioId);
-
-                entity.HasOne(d => d.OrdenProduccionCabecera)
-                    .WithMany(p => p.OrdenesProduccionDetalles)
-                    .HasForeignKey(d => d.OrdenProduccionCabeceraId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.PiezaCodigoNavigation)
-                    .WithMany(p => p.OrdenesProduccionDetalles)
-                    .HasForeignKey(d => d.PiezaCodigo)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-            });
-
-            modelBuilder.Entity<Pieza>(entity =>
-            {
-                entity.HasKey(e => e.Codigo);
-
-                entity.HasIndex(e => e.MarcaId, "IX_Piezas_MarcaId");
-
-                entity.HasIndex(e => e.MaterialId, "IX_Piezas_MaterialId");
-
-                entity.HasIndex(e => e.MatrizId, "IX_Piezas_MatrizId");
-
-                entity.Property(e => e.Codigo).ValueGeneratedNever();
-
-                entity.HasOne(d => d.Marca)
-                    .WithMany(p => p.Piezas)
-                    .HasForeignKey(d => d.MarcaId);
-
-                entity.HasOne(d => d.Material)
-                    .WithMany(p => p.Piezas)
-                    .HasForeignKey(d => d.MaterialId);
-
-                entity.HasOne(d => d.Matriz)
-                    .WithMany(p => p.Piezas)
-                    .HasForeignKey(d => d.MatrizId);
-            });
-
-            OnModelCreatingPartial(modelBuilder);
+            modelBuilder.Entity<OrdenesProduccionDetalle>()
+                .HasKey(c => new { c.PiezaCodigo, c.OrdenProduccionCabeceraId });
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace webAPI.Modelos
+namespace AccesoriosArgentinos.Modelos
 {
     public partial class Inyectora
     {

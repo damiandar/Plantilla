@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AccesoriosArgentinos.Modelos;
+using Microsoft.EntityFrameworkCore;
 
 namespace AccesoriosArgentinos
 {
@@ -23,6 +25,7 @@ namespace AccesoriosArgentinos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddDbContext<AccesoriosDbContext>(o => o.UseSqlite("Data source=AccArg.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
