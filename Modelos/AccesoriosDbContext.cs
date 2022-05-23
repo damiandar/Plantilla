@@ -15,17 +15,16 @@ namespace AccesoriosArgentinos.Modelos
         public AccesoriosDbContext(DbContextOptions<AccesoriosDbContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
-
-        public virtual DbSet<Book> Books { get; set; }
+ 
         public virtual DbSet<Deposito> Depositos { get; set; }
-        public virtual DbSet<EstadosProduccion> EstadosProduccions { get; set; }
+        public virtual DbSet<EstadosProduccion> EstadosProduccion { get; set; }
         public virtual DbSet<Inyectora> Inyectoras { get; set; }
         public virtual DbSet<Marca> Marcas { get; set; }
         public virtual DbSet<MaterialPieza> MaterialPiezas { get; set; }
-        public virtual DbSet<Materiale> Materiales { get; set; }
-        public virtual DbSet<Matrix> Matrices { get; set; }
+        public virtual DbSet<Material> Materiales { get; set; }
+        public virtual DbSet<Matriz> Matrices { get; set; }
         public virtual DbSet<Operario> Operarios { get; set; }
         public virtual DbSet<OrdenesProduccionCabecera> OrdenesProduccionCabeceras { get; set; }
         public virtual DbSet<OrdenesProduccionDetalle> OrdenesProduccionDetalles { get; set; }

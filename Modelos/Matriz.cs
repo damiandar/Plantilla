@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace AccesoriosArgentinos.Modelos
 {
-    public partial class Matrix
+    public partial class Matriz
     {
-        public Matrix()
+        public Matriz()
         {
             OrdenesProduccionDetalles = new HashSet<OrdenesProduccionDetalle>();
             Piezas = new HashSet<Pieza>();

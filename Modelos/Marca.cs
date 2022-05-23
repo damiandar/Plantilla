@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -11,7 +13,7 @@ namespace AccesoriosArgentinos.Modelos
         {
             Piezas = new HashSet<Pieza>();
         }
-
+        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Descripcion { get; set; }
 

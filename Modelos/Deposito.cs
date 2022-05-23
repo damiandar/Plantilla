@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -9,12 +11,12 @@ namespace AccesoriosArgentinos.Modelos
     {
         public Deposito()
         {
-            Matrices = new HashSet<Matrix>();
+            Matrices = new HashSet<Matriz>();
         }
-
-        public string Id { get; set; }
+        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         public string Descripcion { get; set; }
 
-        public virtual ICollection<Matrix> Matrices { get; set; }
+        public virtual ICollection<Matriz> Matrices { get; set; }
     }
 }

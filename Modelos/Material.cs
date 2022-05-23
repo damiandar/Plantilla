@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace AccesoriosArgentinos.Modelos
 {
-    public partial class Materiale
+    public partial class Material
     {
-        public Materiale()
+        public Material()
         {
             MaterialPiezas = new HashSet<MaterialPieza>();
             Piezas = new HashSet<Pieza>();

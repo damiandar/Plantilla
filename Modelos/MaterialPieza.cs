@@ -11,7 +11,7 @@ namespace AccesoriosArgentinos.Modelos
         public int PiezaId { get; set; }
         public int Proporcion {get;set;}
 
-        public virtual Materiale Material { get; set; }
+        public virtual Material Material { get; set; }
         public virtual Pieza Pieza { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace AccesoriosArgentinos.Modelos
         public int Ajuste { get; set; }
 
         public virtual EstadosProduccion Estado { get; set; }
-        public virtual Matrix Matriz { get; set; }
+        public virtual Matriz Matriz { get; set; }
         public virtual Operario Operario { get; set; }
         [ForeignKey("OrdenProduccionCabecera_Id")]
         public virtual OrdenesProduccionCabecera OrdenProduccionCabecera { get; set; }

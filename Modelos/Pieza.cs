@@ -34,8 +34,8 @@ namespace AccesoriosArgentinos.Modelos
         public int ProduccionPorHora { get; set; }
 
         public virtual Marca Marca { get; set; }
-        public virtual Materiale Material { get; set; }
-        public virtual Matrix Matriz { get; set; }
+        public virtual Material Material { get; set; }
+        public virtual Matriz Matriz { get; set; }
         public virtual ICollection<MaterialPieza> MaterialPiezas { get; set; }
         public virtual ICollection<OrdenesProduccionDetalle> OrdenesProduccionDetalles { get; set; }
     }
