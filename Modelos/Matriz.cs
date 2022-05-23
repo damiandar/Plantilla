@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
+
 
 namespace AccesoriosArgentinos.Modelos
 {
@@ -15,6 +15,8 @@ namespace AccesoriosArgentinos.Modelos
 
         public int Id { get; set; }
         public string Descripcion { get; set; }
+
+        public string Estado {get;set;}
         public string DepositoId { get; set; }
 
         public virtual Deposito Deposito { get; set; }

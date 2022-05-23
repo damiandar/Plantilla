@@ -68,6 +68,26 @@ namespace AccesoriosArgentinos.Migrations
             migrationBuilder.Sql("insert into depositos (DESCRIPCION) values('TUCUMAN')");
             migrationBuilder.Sql("insert into depositos (DESCRIPCION) values('TUCUMAN NUEVO')");
             migrationBuilder.Sql("insert into depositos (DESCRIPCION) values('FISCHETTI')");
+
+
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('324' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('253' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('55'  ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('131' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('185' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('196' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('191' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('109' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('261' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('155' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('291' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('293' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('344' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('456' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('256' ,1,'')");
+            migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('254' ,1,'')");
+
+            
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -15,7 +15,7 @@ namespace AccesoriosArgentinos.Modelos
         public AccesoriosDbContext(DbContextOptions<AccesoriosDbContext> options)
             : base(options)
         {
-            //Database.EnsureCreated();
+           //Database.EnsureCreated();
         }
  
         public virtual DbSet<Deposito> Depositos { get; set; }
