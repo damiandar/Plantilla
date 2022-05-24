@@ -29,37 +29,36 @@ namespace AccesoriosArgentinos.Migrations
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP C/5%TALCO MAS ENGANGE STS X BOLSA 20KGS','PP/TD5 ENGANGE NEGRO')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('ABS Negro')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('ABS Cromas')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('PPG-11') ");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('PPCMPPT + PPG11')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('PPCMPPT')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('PP RECUPERADO')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('NYLON 6.6 c/25% FV')");
 
 
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('Anillo goma engranaje plastico')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('Eje engranaje cuerpo mariposa Ex38')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('Ruleman alt. SKF 6203 -2RSH/C3LHT23')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('Ruleman SKF 6204-2RSH')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('Ruleman SKF 6005 2-Z')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('Ruleman bomba de agua grande')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('Ruleman p/armar tensor correa C10924335A')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('grampa moldura guardabarro p/armar')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('tuerca plastica moldura guarda. p/amar')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('buje moleteado Ex39')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('tornillo corto para panel Classic 2010')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('tornillo largo para panel Classic 2010')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('regaton para armar C8534475CE')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('moldura cromada izq.p/rejilla')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('moldura cromada derecha.p/rejilla')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('moldura cromada p/rejilla central')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('tapon de aluminio purga colector 1336G10A')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('tornillo tapizado puerta negro')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('buje tapa distrib. 10(diam.ext.x3,5x8,25')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('buje tapa distrib. 9x3,5x7')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('buje tapa distrib. 6x1 cuadrado')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('buje tapa distrib. 9x5x7')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('oring para tornillo purgador 1917210A')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('ojal para armadura delant.P.206')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('inserto para armadura delant.P.206')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Anillo goma engranaje plastico','55611')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Eje engranaje cuerpo mariposa Ex38','CH133062EJE')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Ruleman alt. SKF 6203 -2RSH/C3LHT23','SKF6203C3L')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Ruleman SKF 6204-2RSH','6204 -2RSH')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Ruleman SKF 6005 2-Z','SKF6005-2Z')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Ruleman bomba de agua grande','1234060I')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Ruleman p/armar tensor correa C10924335A','CH10924335A')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Grampa moldura guardabarro p/armar','CH8370354-T')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Tuerca plastica moldura guarda. p/amar','C8370354A-')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Buje moleteado Ex39','VOL5Z0805757')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Tornillo corto para panel Classic 2010','CH853447 5CC')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Tornillo largo para panel Classic 2010','CH853447 5CL')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Regaton para armar C8534475CE','REGATON')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Moldura cromada izq.p/rejilla','5Z0853361MOLD')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Moldura cromada derecha.p/rejilla','5Z0853362MOLD')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Moldura cromada p/rejilla central','5Z0853671MOLD')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Tapon de aluminio purga colector 1336G10A','1226000N')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Tornillo tapizado puerta negro','6908161N')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Buje tapa distrib. 10(diam.ext.x3,5x8,25','FIATEX37')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Buje tapa distrib. 9x3,5x7','FIATEX36')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Buje tapa distrib. 6x1 cuadrado','FIATEX34')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Buje tapa distrib. 9x5x7','FIATEX35')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Oring para tornillo purgador 1917210A','PG1917210A')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Ojal para armadura delant.P.206',7104CWOJ)");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Inserto para armadura delant.P.206',7104CWIN)");
 
             
 
