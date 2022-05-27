@@ -27,11 +27,30 @@ namespace AccesoriosArgentinos.Migrations
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP C/20%TALCO RECUP.X BOLSA 25KGS','PP/TD20 RG NEGRO')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP C/40%TALCO RECUP.X BOLSA 25KGS','PP/TD40 CM NEGRO')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP C/5%TALCO MAS ENGANGE STS X BOLSA 20KGS','PP/TD5 ENGANGE NEGRO')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('NYLON 6 C/15%FVNEG','NYLON 6 C/15%FVNEG')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('NYLON 6 NATURAL','NYLON 6 NATURAL')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('NYLON 6 NEGRO','NYLON 6 NEGRO')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('NYLON 6.6 NATURAL','NYLON 6.6 NATURAL')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('NYLON 6.6 NEGRO','NYLON 6.6 NEGRO')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('NYLON6.6C/25%-FV NEG','NYLON6.625%-FV NEG')");
+
+
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('ACETAL NATURAL','ACETAL NATURAL')");
+	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PBT 30% FV NATURAL','PBT 30% FV NATURAL')");
+	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PBT 30% FVNEGRO','PBT 30% FVNEGRO')");
+	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('POLIETILENO G-2 NATURAL','POLIETILENO G-2 NATU')");
+
+    	    migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PVC NATURAL 90SHA 6XT','PVC CRISTAL NATURAL')");
+	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PVC NATURAL 65 SHA','PVC NATURAL')");
+
+
+	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('TPE NATURAL 25X20KG','TPE NATURAL 25X20KG')");
+	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('TPENATURAL 55X20KG','TPENATURAL 25X20KG')");
+
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('ABS Negro')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('ABS Cromas')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('PPCMPPT')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('PP RECUPERADO')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('NYLON 6.6 c/25% FV')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION) values('PP RECUPERADO')"); 
 
 
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Anillo goma engranaje plastico','55611')");
