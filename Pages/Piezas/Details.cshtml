@@ -1,0 +1,121 @@
+@page
+@model AccesoriosArgentinos._Pages_Piezas.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Pieza</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.Codigo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.Codigo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.Descripcion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.CodigoFabricacion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.CodigoFabricacion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.Peso)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.Peso)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.Bocas)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.Bocas)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.TiempoDeInyeccion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.TiempoDeInyeccion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.PresionInyeccion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.PresionInyeccion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.VelocidadInyeccion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.VelocidadInyeccion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.Curado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.Curado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.Carga)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.Carga)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.Calefaccion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.Calefaccion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.NoyoA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.NoyoA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.PosicionApertura)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.PosicionApertura)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.ProduccionPorHora)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.ProduccionPorHora)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.Marca)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.Marca.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.Material)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.Material.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pieza.Matriz)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pieza.Matriz.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Pieza.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

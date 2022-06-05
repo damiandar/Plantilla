@@ -4,14 +4,16 @@ using AccesoriosArgentinos.Modelos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AccesoriosArgentinos.Migrations
 {
     [DbContext(typeof(AccesoriosDbContext))]
-    partial class AccesoriosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220604224654_CodigoFabricacion")]
+    partial class CodigoFabricacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,11 +238,11 @@ namespace AccesoriosArgentinos.Migrations
                     b.Property<int>("Bocas")
                         .HasColumnType("int");
 
-                    b.Property<string>("Calefaccion")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Calefaccion")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Carga")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Carga")
+                        .HasColumnType("int");
 
                     b.Property<string>("Codigo")
                         .HasColumnType("nvarchar(max)");
@@ -253,9 +255,6 @@ namespace AccesoriosArgentinos.Migrations
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("InyectoraId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("MarcaId")
                         .HasColumnType("int");
@@ -281,15 +280,13 @@ namespace AccesoriosArgentinos.Migrations
                     b.Property<int>("ProduccionPorHora")
                         .HasColumnType("int");
 
-                    b.Property<string>("TiempoDeInyeccion")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TiempoDeInyeccion")
+                        .HasColumnType("int");
 
                     b.Property<string>("VelocidadInyeccion")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("InyectoraId");
 
                     b.HasIndex("MarcaId");
 
@@ -372,10 +369,6 @@ namespace AccesoriosArgentinos.Migrations
 
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.Pieza", b =>
                 {
-                    b.HasOne("AccesoriosArgentinos.Modelos.Inyectora", "Inyectora")
-                        .WithMany("Piezas")
-                        .HasForeignKey("InyectoraId");
-
                     b.HasOne("AccesoriosArgentinos.Modelos.Marca", "Marca")
                         .WithMany("Piezas")
                         .HasForeignKey("MarcaId");
@@ -387,8 +380,6 @@ namespace AccesoriosArgentinos.Migrations
                     b.HasOne("AccesoriosArgentinos.Modelos.Matriz", "Matriz")
                         .WithMany("Piezas")
                         .HasForeignKey("MatrizId");
-
-                    b.Navigation("Inyectora");
 
                     b.Navigation("Marca");
 
@@ -410,8 +401,6 @@ namespace AccesoriosArgentinos.Migrations
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.Inyectora", b =>
                 {
                     b.Navigation("OrdenesProduccionCabeceras");
-
-                    b.Navigation("Piezas");
                 });
 
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.Marca", b =>

@@ -3,48 +3,33 @@ using System;
 using AccesoriosArgentinos.Modelos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AccesoriosArgentinos.Migrations
 {
     [DbContext(typeof(AccesoriosDbContext))]
-    [Migration("20220523144108_Datos")]
-    partial class Datos
+    [Migration("20220604224203_Codigo")]
+    partial class Codigo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.10");
-
-            modelBuilder.Entity("AccesoriosArgentinos.Modelos.Book", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Author")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Books");
-                });
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.10")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.Deposito", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -55,24 +40,26 @@ namespace AccesoriosArgentinos.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("EstadosProduccions");
+                    b.ToTable("EstadosProduccion");
                 });
 
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.Inyectora", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -83,26 +70,45 @@ namespace AccesoriosArgentinos.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Marcas");
                 });
 
+            modelBuilder.Entity("AccesoriosArgentinos.Modelos.Material", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Materiales");
+                });
+
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.MaterialPieza", b =>
                 {
                     b.Property<int>("PiezaId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("MaterialId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("Proporcion")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("PiezaId", "MaterialId");
 
@@ -111,38 +117,28 @@ namespace AccesoriosArgentinos.Migrations
                     b.ToTable("MaterialPiezas");
                 });
 
-            modelBuilder.Entity("AccesoriosArgentinos.Modelos.Materiale", b =>
+            modelBuilder.Entity("AccesoriosArgentinos.Modelos.Matriz", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Codigo")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Materiales");
-                });
-
-            modelBuilder.Entity("AccesoriosArgentinos.Modelos.Matrix", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DepositoId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DepositoId1")
+                        .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepositoId");
+                    b.HasIndex("DepositoId1");
 
                     b.ToTable("Matrices");
                 });
@@ -151,13 +147,14 @@ namespace AccesoriosArgentinos.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Apellido")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -168,13 +165,14 @@ namespace AccesoriosArgentinos.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("InyectoraId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -186,31 +184,34 @@ namespace AccesoriosArgentinos.Migrations
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.OrdenesProduccionDetalle", b =>
                 {
                     b.Property<int>("PiezaCodigo")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("OrdenProduccionCabeceraId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("Ajuste")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("Cantidad")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("EstadoId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("ImpactosVacios")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("MatrizId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("OperarioId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("OrdenProduccionCabecera_Id")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PiezaCodigoNavigationId")
+                        .HasColumnType("int");
 
                     b.HasKey("PiezaCodigo", "OrdenProduccionCabeceraId");
 
@@ -222,64 +223,70 @@ namespace AccesoriosArgentinos.Migrations
 
                     b.HasIndex("OrdenProduccionCabecera_Id");
 
+                    b.HasIndex("PiezaCodigoNavigationId");
+
                     b.ToTable("OrdenesProduccionDetalles");
                 });
 
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.Pieza", b =>
                 {
-                    b.Property<int>("Codigo")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Bocas")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("Calefaccion")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("Carga")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    b.Property<string>("Codigo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CodigoFabricacion")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("Curado")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("MarcaId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("MaterialId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("MatrizId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("NoyoA")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Peso")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("PosicionApertura")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PresionInyeccion")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProduccionPorHora")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("TiempoDeInyeccion")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("VelocidadInyeccion")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Codigo");
+                    b.HasKey("Id");
 
                     b.HasIndex("MarcaId");
 
@@ -292,7 +299,7 @@ namespace AccesoriosArgentinos.Migrations
 
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.MaterialPieza", b =>
                 {
-                    b.HasOne("AccesoriosArgentinos.Modelos.Materiale", "Material")
+                    b.HasOne("AccesoriosArgentinos.Modelos.Material", "Material")
                         .WithMany("MaterialPiezas")
                         .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -309,11 +316,11 @@ namespace AccesoriosArgentinos.Migrations
                     b.Navigation("Pieza");
                 });
 
-            modelBuilder.Entity("AccesoriosArgentinos.Modelos.Matrix", b =>
+            modelBuilder.Entity("AccesoriosArgentinos.Modelos.Matriz", b =>
                 {
                     b.HasOne("AccesoriosArgentinos.Modelos.Deposito", "Deposito")
                         .WithMany("Matrices")
-                        .HasForeignKey("DepositoId");
+                        .HasForeignKey("DepositoId1");
 
                     b.Navigation("Deposito");
                 });
@@ -333,7 +340,7 @@ namespace AccesoriosArgentinos.Migrations
                         .WithMany("OrdenesProduccionDetalles")
                         .HasForeignKey("EstadoId");
 
-                    b.HasOne("AccesoriosArgentinos.Modelos.Matrix", "Matriz")
+                    b.HasOne("AccesoriosArgentinos.Modelos.Matriz", "Matriz")
                         .WithMany("OrdenesProduccionDetalles")
                         .HasForeignKey("MatrizId");
 
@@ -347,9 +354,7 @@ namespace AccesoriosArgentinos.Migrations
 
                     b.HasOne("AccesoriosArgentinos.Modelos.Pieza", "PiezaCodigoNavigation")
                         .WithMany("OrdenesProduccionDetalles")
-                        .HasForeignKey("PiezaCodigo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PiezaCodigoNavigationId");
 
                     b.Navigation("Estado");
 
@@ -368,11 +373,11 @@ namespace AccesoriosArgentinos.Migrations
                         .WithMany("Piezas")
                         .HasForeignKey("MarcaId");
 
-                    b.HasOne("AccesoriosArgentinos.Modelos.Materiale", "Material")
+                    b.HasOne("AccesoriosArgentinos.Modelos.Material", "Material")
                         .WithMany("Piezas")
                         .HasForeignKey("MaterialId");
 
-                    b.HasOne("AccesoriosArgentinos.Modelos.Matrix", "Matriz")
+                    b.HasOne("AccesoriosArgentinos.Modelos.Matriz", "Matriz")
                         .WithMany("Piezas")
                         .HasForeignKey("MatrizId");
 
@@ -403,14 +408,14 @@ namespace AccesoriosArgentinos.Migrations
                     b.Navigation("Piezas");
                 });
 
-            modelBuilder.Entity("AccesoriosArgentinos.Modelos.Materiale", b =>
+            modelBuilder.Entity("AccesoriosArgentinos.Modelos.Material", b =>
                 {
                     b.Navigation("MaterialPiezas");
 
                     b.Navigation("Piezas");
                 });
 
-            modelBuilder.Entity("AccesoriosArgentinos.Modelos.Matrix", b =>
+            modelBuilder.Entity("AccesoriosArgentinos.Modelos.Matriz", b =>
                 {
                     b.Navigation("OrdenesProduccionDetalles");
 

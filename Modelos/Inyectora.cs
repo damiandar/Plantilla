@@ -16,5 +16,6 @@ namespace AccesoriosArgentinos.Modelos
         public string Descripcion { get; set; }
 
         public virtual ICollection<OrdenesProduccionCabecera> OrdenesProduccionCabeceras { get; set; }
+        public virtual ICollection<Pieza> Piezas { get; set; }
     }
 }
