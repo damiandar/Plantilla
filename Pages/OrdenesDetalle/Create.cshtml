@@ -1,0 +1,60 @@
+ 
+@model AccesoriosArgentinos._Pages_OrdenesDetalle.CreateModel
+ 
+
+<h1>Create</h1>
+
+<h4>OrdenesProduccionDetalle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OrdenesProduccionDetalle.PiezaCodigo" class="control-label"></label>
+                <input asp-for="OrdenesProduccionDetalle.PiezaCodigo" class="form-control" />
+                <span asp-validation-for="OrdenesProduccionDetalle.PiezaCodigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrdenesProduccionDetalle.OrdenProduccionCabeceraId" class="control-label"></label>
+                <input asp-for="OrdenesProduccionDetalle.OrdenProduccionCabeceraId" class="form-control" />
+                <span asp-validation-for="OrdenesProduccionDetalle.OrdenProduccionCabeceraId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrdenesProduccionDetalle.Cantidad" class="control-label"></label>
+                <input asp-for="OrdenesProduccionDetalle.Cantidad" class="form-control" />
+                <span asp-validation-for="OrdenesProduccionDetalle.Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrdenesProduccionDetalle.MatrizId" class="control-label"></label>
+                <select asp-for="OrdenesProduccionDetalle.MatrizId" class ="form-control" asp-items="ViewBag.MatrizId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrdenesProduccionDetalle.EstadoId" class="control-label"></label>
+                <select asp-for="OrdenesProduccionDetalle.EstadoId" class ="form-control" asp-items="ViewBag.EstadoId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrdenesProduccionDetalle.OperarioId" class="control-label"></label>
+                <select asp-for="OrdenesProduccionDetalle.OperarioId" class ="form-control" asp-items="ViewBag.OperarioId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrdenesProduccionDetalle.ImpactosVacios" class="control-label"></label>
+                <input asp-for="OrdenesProduccionDetalle.ImpactosVacios" class="form-control" />
+                <span asp-validation-for="OrdenesProduccionDetalle.ImpactosVacios" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrdenesProduccionDetalle.Ajuste" class="control-label"></label>
+                <input asp-for="OrdenesProduccionDetalle.Ajuste" class="form-control" />
+                <span asp-validation-for="OrdenesProduccionDetalle.Ajuste" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+

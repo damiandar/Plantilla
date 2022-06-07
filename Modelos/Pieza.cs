@@ -1,12 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 #nullable disable
 
 namespace AccesoriosArgentinos.Modelos
 {
+    public class PiezaVM {
+        public Pieza Pieza {get;set;}
+        
+        public SelectList ListaMarcas{get;set;}
+       
+        public SelectList ListaMateriales {get;set;}
+       
+        public SelectList ListaMatrices {get;set;}
+        
+        public SelectList ListaInyectoras {get;set;}
+
+    }
     public partial class Pieza
     {
         public Pieza()
@@ -51,5 +65,9 @@ namespace AccesoriosArgentinos.Modelos
         public virtual ICollection<MaterialPieza> MaterialPiezas { get; set; }
         public virtual ICollection<OrdenesProduccionDetalle> OrdenesProduccionDetalles { get; set; }
         public virtual Inyectora Inyectora { get; set; }
+        [NotMapped]
+        public string FotoRuta {get;set;}
+        [NotMapped]
+        public IFormFile Foto {get;set;}
     }
 }

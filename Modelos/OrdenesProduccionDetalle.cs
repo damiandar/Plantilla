@@ -7,6 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AccesoriosArgentinos.Modelos
 {
+    public class OrdenDetalleVM { 
+        public OrdenesProduccionDetalle OrdenDetalle { get; set; }
+    }
     public partial class OrdenesProduccionDetalle
     {
         public int PiezaCodigo { get; set; }

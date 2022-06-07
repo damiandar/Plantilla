@@ -4,114 +4,11 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
-
-<h4>Pieza</h4>
-<hr />
+ 
 <div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Pieza.Codigo" class="control-label"></label>
-                <input asp-for="Pieza.Codigo" class="form-control" />
-                <span asp-validation-for="Pieza.Codigo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.MarcaId" class="control-label"></label>
-                <select asp-for="Pieza.MarcaId" class ="form-control" asp-items="ViewBag.MarcaId">
-                    
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.InyectoraId" class="control-label"></label>
-                <select asp-for="Pieza.InyectoraId" class ="form-control" asp-items="ViewBag.Inyectoras">
-                    
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.Descripcion" class="control-label"></label>
-                <input asp-for="Pieza.Descripcion" class="form-control" />
-                <span asp-validation-for="Pieza.Descripcion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.CodigoFabricacion" class="control-label"></label>
-                <input asp-for="Pieza.CodigoFabricacion" class="form-control" />
-                <span asp-validation-for="Pieza.CodigoFabricacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.MatrizId" class="control-label"></label>
-                <select asp-for="Pieza.MatrizId" class ="form-control" asp-items="ViewBag.MatrizId">
-                    
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.MaterialId" class="control-label"></label>
-                <select asp-for="Pieza.MaterialId" class ="form-control" asp-items="ViewBag.MaterialId">
-                    
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.Peso" class="control-label"></label>
-                <input asp-for="Pieza.Peso" class="form-control" />
-                <span asp-validation-for="Pieza.Peso" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.Bocas" class="control-label"></label>
-                <input asp-for="Pieza.Bocas" class="form-control" />
-                <span asp-validation-for="Pieza.Bocas" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.TiempoDeInyeccion" class="control-label"></label>
-                <input asp-for="Pieza.TiempoDeInyeccion" class="form-control" />
-                <span asp-validation-for="Pieza.TiempoDeInyeccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.PresionInyeccion" class="control-label"></label>
-                <input asp-for="Pieza.PresionInyeccion" class="form-control" />
-                <span asp-validation-for="Pieza.PresionInyeccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.VelocidadInyeccion" class="control-label"></label>
-                <input asp-for="Pieza.VelocidadInyeccion" class="form-control" />
-                <span asp-validation-for="Pieza.VelocidadInyeccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.Curado" class="control-label"></label>
-                <input asp-for="Pieza.Curado" class="form-control" />
-                <span asp-validation-for="Pieza.Curado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.Carga" class="control-label"></label>
-                <input asp-for="Pieza.Carga" class="form-control" />
-                <span asp-validation-for="Pieza.Carga" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.Calefaccion" class="control-label"></label>
-                <input asp-for="Pieza.Calefaccion" class="form-control" />
-                <span asp-validation-for="Pieza.Calefaccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.NoyoA" class="control-label"></label>
-                <input asp-for="Pieza.NoyoA" class="form-control" />
-                <span asp-validation-for="Pieza.NoyoA" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.PosicionApertura" class="control-label"></label>
-                <input asp-for="Pieza.PosicionApertura" class="form-control" />
-                <span asp-validation-for="Pieza.PosicionApertura" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pieza.ProduccionPorHora" class="control-label"></label>
-                <input asp-for="Pieza.ProduccionPorHora" class="form-control" />
-                <span asp-validation-for="Pieza.ProduccionPorHora" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Grabar" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+    
+        <partial name="_FormPieza" model="@Model.PiezaVM" />
+   
 </div>
 
 <div>

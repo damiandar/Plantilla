@@ -7,40 +7,48 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AccesoriosArgentinos.Modelos;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AccesoriosArgentinos._Pages_Piezas
 {
     public class EditModel : PageModel
     {
-        private readonly AccesoriosArgentinos.Modelos.AccesoriosDbContext _context;
+        [BindProperty]
+        public PiezaVM PiezaVM { get; set; }
 
-        public EditModel(AccesoriosArgentinos.Modelos.AccesoriosDbContext context)
+        private readonly AccesoriosArgentinos.Modelos.AccesoriosDbContext _context;
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public EditModel(AccesoriosArgentinos.Modelos.AccesoriosDbContext context,IWebHostEnvironment hostingEnviroment)
         {
             _context = context;
+            _hostingEnvironment=hostingEnviroment;
         }
-
-        [BindProperty]
-        public Pieza Pieza { get; set; }
+ 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            PiezaVM = new PiezaVM();
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            Pieza = await _context.Piezas
+            PiezaVM.Pieza = await _context.Piezas
                 .Include(p => p.Marca)
                 .Include(p => p.Material)
                 .Include(p => p.Matriz).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Pieza == null)
+            if (PiezaVM.Pieza == null)
             {
                 return NotFound();
-            }
-           ViewData["MarcaId"] = new SelectList(_context.Marcas, "Id", "Id");
-           ViewData["MaterialId"] = new SelectList(_context.Materiales, "Id", "Id");
-           ViewData["MatrizId"] = new SelectList(_context.Matrices, "Id", "Id");
+            } 
+            PiezaVM.ListaMarcas = new SelectList(_context.Marcas, "Id", "Descripcion");
+            PiezaVM.ListaMateriales = new SelectList(_context.Materiales, "Id", "Descripcion");
+            PiezaVM.ListaMatrices = new SelectList(_context.Matrices, "Id", "Descripcion");
+            PiezaVM.ListaInyectoras = new SelectList(_context.Inyectoras, "Id", "Descripcion");
             return Page();
         }
 
@@ -52,8 +60,17 @@ namespace AccesoriosArgentinos._Pages_Piezas
             {
                 return Page();
             }
-
-            _context.Attach(Pieza).State = EntityState.Modified;
+            if(PiezaVM.Pieza.Foto!=null){
+                string carpetaFotos=Path.Combine(_hostingEnvironment.WebRootPath,"images");
+                //string nombreArchivo=Pieza.Foto.FileName;
+                string nombreArchivo= PiezaVM.Pieza.Codigo + ".jpg";
+                string rutaCompleta=Path.Combine(carpetaFotos,nombreArchivo);
+                //subimos la imagen al servidor
+                PiezaVM.Pieza.Foto.CopyTo(new FileStream(rutaCompleta,FileMode.Create));
+                //guardar la ruta de la imagen en la base de datos
+                PiezaVM.Pieza.FotoRuta=nombreArchivo;
+            }
+            _context.Attach(PiezaVM.Pieza).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +78,7 @@ namespace AccesoriosArgentinos._Pages_Piezas
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PiezaExists(Pieza.Id))
+                if (!PiezaExists(PiezaVM.Pieza.Id))
                 {
                     return NotFound();
                 }

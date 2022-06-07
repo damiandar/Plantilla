@@ -1,0 +1,87 @@
+@page
+@model AccesoriosArgentinos._Pages_Ordenes.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>OrdenesProduccionCabecera</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrdenesProduccionCabecera.Id" />
+            <div class="form-group">
+                <label asp-for="OrdenesProduccionCabecera.InyectoraId" class="control-label"></label>
+                <select asp-for="OrdenesProduccionCabecera.InyectoraId" class="form-control" asp-items="ViewBag.InyectoraId"></select>
+                <span asp-validation-for="OrdenesProduccionCabecera.InyectoraId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrdenesProduccionCabecera.FechaCreacion" class="control-label"></label>
+                <input asp-for="OrdenesProduccionCabecera.FechaCreacion" class="form-control" />
+                <span asp-validation-for="OrdenesProduccionCabecera.FechaCreacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+        <form method="post">
+            <div class="form-group">
+                <label class="control-label">Pieza</label>
+                <select name="codigo" class="form-control" asp-items="ViewBag.Piezas"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Cantidad</label>
+                <input name="cantidad" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" asp-page-handler="Pieza" />
+            </div>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Pieza
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>Material</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in (IEnumerable<AccesoriosArgentinos.Modelos.OrdenesProduccionDetalle>)ViewData["Items"])
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PiezaCodigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            <a asp-page="./Delete" asp-route-id="@item.PiezaCodigo">Borrar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div>
+
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
