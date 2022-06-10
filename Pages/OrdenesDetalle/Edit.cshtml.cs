@@ -32,7 +32,7 @@ namespace AccesoriosArgentinos._Pages_OrdenesDetalle
             OrdenesProduccionDetalle = await _context.OrdenesProduccionDetalles
                 .Include(o => o.Estado)
                 .Include(o => o.Matriz)
-                .Include(o => o.Operario).FirstOrDefaultAsync(m => m.PiezaCodigo == id);
+                .Include(o => o.Operario).FirstOrDefaultAsync(m => m.PiezaId == id);
 
             if (OrdenesProduccionDetalle == null)
             {
@@ -61,7 +61,7 @@ namespace AccesoriosArgentinos._Pages_OrdenesDetalle
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrdenesProduccionDetalleExists(OrdenesProduccionDetalle.PiezaCodigo))
+                if (!OrdenesProduccionDetalleExists(OrdenesProduccionDetalle.PiezaId))
                 {
                     return NotFound();
                 }
@@ -76,7 +76,7 @@ namespace AccesoriosArgentinos._Pages_OrdenesDetalle
 
         private bool OrdenesProduccionDetalleExists(int id)
         {
-            return _context.OrdenesProduccionDetalles.Any(e => e.PiezaCodigo == id);
+            return _context.OrdenesProduccionDetalles.Any(e => e.PiezaId == id);
         }
     }
 }

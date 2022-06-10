@@ -44,7 +44,7 @@ namespace AccesoriosArgentinos.Modelos
                 .HasKey(c => new { c.PiezaId, c.MaterialId });
 
             modelBuilder.Entity<OrdenesProduccionDetalle>()
-                .HasKey(c => new { c.PiezaCodigo, c.OrdenProduccionCabeceraId });
+                .HasKey(c => new { c.PiezaId, c.OrdenProduccionCabeceraId });
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

@@ -60,7 +60,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.PiezaCodigo)
+                            @Html.DisplayFor(modelItem => item.PiezaId)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Cantidad)
@@ -69,7 +69,7 @@
                             @Html.DisplayFor(modelItem => item.Cantidad)
                         </td>
                         <td>
-                            <a asp-page="./Delete" asp-route-id="@item.PiezaCodigo">Borrar</a>
+                            <a asp-page="./Delete" asp-route-id="@item.PiezaId">Borrar</a>
                         </td>
                     </tr>
                 }

@@ -12,7 +12,7 @@ namespace AccesoriosArgentinos.Modelos
     }
     public partial class OrdenesProduccionDetalle
     {
-        public int PiezaCodigo { get; set; }
+        public int PiezaId { get; set; }
         public int OrdenProduccionCabeceraId { get; set; }
         public int Cantidad { get; set; }
         public int? MatrizId { get; set; }
@@ -26,6 +26,6 @@ namespace AccesoriosArgentinos.Modelos
         public virtual Operario Operario { get; set; }
         [ForeignKey("OrdenProduccionCabecera_Id")]
         public virtual OrdenesProduccionCabecera OrdenProduccionCabecera { get; set; }
-        public virtual Pieza PiezaCodigoNavigation { get; set; }
+        public virtual Pieza Pieza { get; set; }
     }
 }

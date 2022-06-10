@@ -37,7 +37,6 @@ namespace AccesoriosArgentinos._Pages_Ordenes
             {
                 return NotFound();
             }
-             ViewData["Piezas"] = new SelectList(_context.Piezas.Where(x=>x.InyectoraId==OrdenesProduccionCabecera.InyectoraId).ToList(), "Id", "Id");
             var Items = _context.OrdenesProduccionDetalles.Where(x => x.OrdenProduccionCabeceraId == id).ToList();
             var Piezas = _context.Piezas.Where(x => x.InyectoraId == OrdenesProduccionCabecera.InyectoraId).ToList();
             ViewData["InyectoraId"] = new SelectList(_context.Inyectoras, "Id", "Id");
@@ -49,6 +48,21 @@ namespace AccesoriosArgentinos._Pages_Ordenes
         public void OnPostPieza(int codigo,int cantidad) {
             var valor1 = codigo;
             var valor2 = cantidad;
+
+            var Pieza = _context.Piezas.Where(x => x.Id == codigo).First();
+
+            var Item = new OrdenesProduccionDetalle();
+            Item.Pieza = Pieza;
+
+            _context.OrdenesProduccionDetalles.Add(Item);
+            _context.SaveChanges();
+
+            var Items = _context.OrdenesProduccionDetalles.Where(x => x.OrdenProduccionCabeceraId == OrdenesProduccionCabecera.Id).ToList();
+            var Piezas = _context.Piezas.Where(x => x.InyectoraId == OrdenesProduccionCabecera.InyectoraId).ToList();
+            ViewData["InyectoraId"] = new SelectList(_context.Inyectoras, "Id", "Id");
+            ViewData["Items"] = Items;
+            ViewData["Piezas"] = new SelectList(Piezas, "Id", "Descripcion");
+
         }
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.

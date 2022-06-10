@@ -31,7 +31,7 @@ namespace AccesoriosArgentinos._Pages_OrdenesDetalle
             OrdenesProduccionDetalle = await _context.OrdenesProduccionDetalles
                 .Include(o => o.Estado)
                 .Include(o => o.Matriz)
-                .Include(o => o.Operario).FirstOrDefaultAsync(m => m.PiezaCodigo == id);
+                .Include(o => o.Operario).FirstOrDefaultAsync(m => m.PiezaId == id);
 
             if (OrdenesProduccionDetalle == null)
             {
