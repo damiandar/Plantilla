@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccesoriosArgentinos.Migrations
 {
     [DbContext(typeof(AccesoriosDbContext))]
-    [Migration("20220604224203_Codigo")]
-    partial class Codigo
+    [Migration("20220614175405_Primera")]
+    partial class Primera
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -183,7 +183,7 @@ namespace AccesoriosArgentinos.Migrations
 
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.OrdenesProduccionDetalle", b =>
                 {
-                    b.Property<int>("PiezaCodigo")
+                    b.Property<int>("PiezaId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrdenProduccionCabeceraId")
@@ -207,13 +207,7 @@ namespace AccesoriosArgentinos.Migrations
                     b.Property<int?>("OperarioId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrdenProduccionCabecera_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PiezaCodigoNavigationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PiezaCodigo", "OrdenProduccionCabeceraId");
+                    b.HasKey("PiezaId", "OrdenProduccionCabeceraId");
 
                     b.HasIndex("EstadoId");
 
@@ -221,9 +215,7 @@ namespace AccesoriosArgentinos.Migrations
 
                     b.HasIndex("OperarioId");
 
-                    b.HasIndex("OrdenProduccionCabecera_Id");
-
-                    b.HasIndex("PiezaCodigoNavigationId");
+                    b.HasIndex("OrdenProduccionCabeceraId");
 
                     b.ToTable("OrdenesProduccionDetalles");
                 });
@@ -238,23 +230,26 @@ namespace AccesoriosArgentinos.Migrations
                     b.Property<int>("Bocas")
                         .HasColumnType("int");
 
-                    b.Property<int>("Calefaccion")
-                        .HasColumnType("int");
+                    b.Property<string>("Calefaccion")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Carga")
-                        .HasColumnType("int");
+                    b.Property<string>("Carga")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Codigo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CodigoFabricacion")
-                        .HasColumnType("int");
+                    b.Property<string>("CodigoFabricacion")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Curado")
                         .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("InyectoraId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("MarcaId")
                         .HasColumnType("int");
@@ -280,13 +275,15 @@ namespace AccesoriosArgentinos.Migrations
                     b.Property<int>("ProduccionPorHora")
                         .HasColumnType("int");
 
-                    b.Property<int>("TiempoDeInyeccion")
-                        .HasColumnType("int");
+                    b.Property<string>("TiempoDeInyeccion")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VelocidadInyeccion")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InyectoraId");
 
                     b.HasIndex("MarcaId");
 
@@ -350,11 +347,15 @@ namespace AccesoriosArgentinos.Migrations
 
                     b.HasOne("AccesoriosArgentinos.Modelos.OrdenesProduccionCabecera", "OrdenProduccionCabecera")
                         .WithMany("OrdenesProduccionDetalles")
-                        .HasForeignKey("OrdenProduccionCabecera_Id");
+                        .HasForeignKey("OrdenProduccionCabeceraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("AccesoriosArgentinos.Modelos.Pieza", "PiezaCodigoNavigation")
+                    b.HasOne("AccesoriosArgentinos.Modelos.Pieza", "Pieza")
                         .WithMany("OrdenesProduccionDetalles")
-                        .HasForeignKey("PiezaCodigoNavigationId");
+                        .HasForeignKey("PiezaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Estado");
 
@@ -364,11 +365,15 @@ namespace AccesoriosArgentinos.Migrations
 
                     b.Navigation("OrdenProduccionCabecera");
 
-                    b.Navigation("PiezaCodigoNavigation");
+                    b.Navigation("Pieza");
                 });
 
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.Pieza", b =>
                 {
+                    b.HasOne("AccesoriosArgentinos.Modelos.Inyectora", "Inyectora")
+                        .WithMany("Piezas")
+                        .HasForeignKey("InyectoraId");
+
                     b.HasOne("AccesoriosArgentinos.Modelos.Marca", "Marca")
                         .WithMany("Piezas")
                         .HasForeignKey("MarcaId");
@@ -380,6 +385,8 @@ namespace AccesoriosArgentinos.Migrations
                     b.HasOne("AccesoriosArgentinos.Modelos.Matriz", "Matriz")
                         .WithMany("Piezas")
                         .HasForeignKey("MatrizId");
+
+                    b.Navigation("Inyectora");
 
                     b.Navigation("Marca");
 
@@ -401,6 +408,8 @@ namespace AccesoriosArgentinos.Migrations
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.Inyectora", b =>
                 {
                     b.Navigation("OrdenesProduccionCabeceras");
+
+                    b.Navigation("Piezas");
                 });
 
             modelBuilder.Entity("AccesoriosArgentinos.Modelos.Marca", b =>

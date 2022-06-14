@@ -135,20 +135,21 @@ namespace AccesoriosArgentinos.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Codigo = table.Column<int>(type: "int", nullable: false),
+                    Codigo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MarcaId = table.Column<int>(type: "int", nullable: true),
+                    InyectoraId = table.Column<int>(type: "int", nullable: true),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoFabricacion = table.Column<int>(type: "int", nullable: false),
+                    CodigoFabricacion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MatrizId = table.Column<int>(type: "int", nullable: true),
                     MaterialId = table.Column<int>(type: "int", nullable: true),
                     Peso = table.Column<int>(type: "int", nullable: false),
                     Bocas = table.Column<int>(type: "int", nullable: false),
-                    TiempoDeInyeccion = table.Column<int>(type: "int", nullable: false),
+                    TiempoDeInyeccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PresionInyeccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     VelocidadInyeccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Curado = table.Column<int>(type: "int", nullable: false),
-                    Carga = table.Column<int>(type: "int", nullable: false),
-                    Calefaccion = table.Column<int>(type: "int", nullable: false),
+                    Carga = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Calefaccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NoyoA = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PosicionApertura = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProduccionPorHora = table.Column<int>(type: "int", nullable: false)
@@ -156,6 +157,12 @@ namespace AccesoriosArgentinos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piezas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Piezas_Inyectoras_InyectoraId",
+                        column: x => x.InyectoraId,
+                        principalTable: "Inyectoras",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Piezas_Marcas_MarcaId",
                         column: x => x.MarcaId,
@@ -205,20 +212,18 @@ namespace AccesoriosArgentinos.Migrations
                 name: "OrdenesProduccionDetalles",
                 columns: table => new
                 {
-                    PiezaCodigo = table.Column<int>(type: "int", nullable: false),
+                    PiezaId = table.Column<int>(type: "int", nullable: false),
                     OrdenProduccionCabeceraId = table.Column<int>(type: "int", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     MatrizId = table.Column<int>(type: "int", nullable: true),
                     EstadoId = table.Column<int>(type: "int", nullable: true),
                     OperarioId = table.Column<int>(type: "int", nullable: true),
                     ImpactosVacios = table.Column<int>(type: "int", nullable: false),
-                    Ajuste = table.Column<int>(type: "int", nullable: false),
-                    OrdenProduccionCabecera_Id = table.Column<int>(type: "int", nullable: true),
-                    PiezaCodigoNavigationId = table.Column<int>(type: "int", nullable: true)
+                    Ajuste = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrdenesProduccionDetalles", x => new { x.PiezaCodigo, x.OrdenProduccionCabeceraId });
+                    table.PrimaryKey("PK_OrdenesProduccionDetalles", x => new { x.PiezaId, x.OrdenProduccionCabeceraId });
                     table.ForeignKey(
                         name: "FK_OrdenesProduccionDetalles_EstadosProduccion_EstadoId",
                         column: x => x.EstadoId,
@@ -238,17 +243,17 @@ namespace AccesoriosArgentinos.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_OrdenesProduccionDetalles_OrdenesProduccionCabeceras_OrdenProduccionCabecera_Id",
-                        column: x => x.OrdenProduccionCabecera_Id,
+                        name: "FK_OrdenesProduccionDetalles_OrdenesProduccionCabeceras_OrdenProduccionCabeceraId",
+                        column: x => x.OrdenProduccionCabeceraId,
                         principalTable: "OrdenesProduccionCabeceras",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrdenesProduccionDetalles_Piezas_PiezaCodigoNavigationId",
-                        column: x => x.PiezaCodigoNavigationId,
+                        name: "FK_OrdenesProduccionDetalles_Piezas_PiezaId",
+                        column: x => x.PiezaId,
                         principalTable: "Piezas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -282,14 +287,14 @@ namespace AccesoriosArgentinos.Migrations
                 column: "OperarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdenesProduccionDetalles_OrdenProduccionCabecera_Id",
+                name: "IX_OrdenesProduccionDetalles_OrdenProduccionCabeceraId",
                 table: "OrdenesProduccionDetalles",
-                column: "OrdenProduccionCabecera_Id");
+                column: "OrdenProduccionCabeceraId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdenesProduccionDetalles_PiezaCodigoNavigationId",
-                table: "OrdenesProduccionDetalles",
-                column: "PiezaCodigoNavigationId");
+                name: "IX_Piezas_InyectoraId",
+                table: "Piezas",
+                column: "InyectoraId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Piezas_MarcaId",
@@ -305,6 +310,7 @@ namespace AccesoriosArgentinos.Migrations
                 name: "IX_Piezas_MatrizId",
                 table: "Piezas",
                 column: "MatrizId");
+
             migrationBuilder.Sql("insert into Marcas (descripcion) values('Fiat')");
             migrationBuilder.Sql("insert into Marcas (descripcion) values('Ford')");
             migrationBuilder.Sql("insert into Marcas (descripcion) values('Peugeot')");
@@ -332,23 +338,23 @@ namespace AccesoriosArgentinos.Migrations
 
 
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('ACETAL NATURAL','ACETAL NATURAL')");
-	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PBT 30% FV NATURAL','PBT 30% FV NATURAL')");
-	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PBT 30% FVNEGRO','PBT 30% FVNEGRO')");
-	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('POLIETILENO G-2 NATURAL','POLIETILENO G-2 NATU')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PBT 30% FV NATURAL','PBT 30% FV NATURAL')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PBT 30% FVNEGRO','PBT 30% FVNEGRO')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('POLIETILENO G-2 NATURAL','POLIETILENO G-2 NATU')");
 
-    	    migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PVC NATURAL 90SHA 6XT','PVC CRISTAL NATURAL')");
-	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PVC NATURAL 65 SHA','PVC NATURAL')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PVC NATURAL 90SHA 6XT','PVC CRISTAL NATURAL')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PVC NATURAL 65 SHA','PVC NATURAL')");
 
 
-	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('TPE NATURAL 25X20KG','TPE NATURAL 25X20KG')");
-	        migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('TPENATURAL 55X20KG','TPENATURAL 25X20KG')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('TPE NATURAL 25X20KG','TPE NATURAL 25X20KG')");
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('TPENATURAL 55X20KG','TPENATURAL 25X20KG')");
 
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('ABS Starex','ABS Starex')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('ABS Negro','ABS Negro')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('ABS Cromas','ABS Cromas')");
             migrationBuilder.Sql("insert into Materiales (descripcion,codigo) values('ABS Recuperado','ABS Recuperado')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PPCMPPT','PPCMPPT')");
-            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP RECUPERADO','PP RECUPERADO')"); 
+            migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP RECUPERADO','PP RECUPERADO')");
 
 
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Anillo goma engranaje plastico','55611')");
@@ -377,7 +383,7 @@ namespace AccesoriosArgentinos.Migrations
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Ojal para armadura delant.P.206','7104CWOJ')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('Inserto para armadura delant.P.206','7104CWIN')");
 
-            
+
 
             migrationBuilder.Sql("insert into depositos (DESCRIPCION) values('VALLEJOS')");
             migrationBuilder.Sql("insert into depositos (DESCRIPCION) values('PLANTA CASEROS')");
@@ -402,7 +408,11 @@ namespace AccesoriosArgentinos.Migrations
             migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('456' ,1,'')");
             migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('256' ,1,'')");
             migrationBuilder.Sql("insert into matrices (descripcion,depositoid,estado) values('254' ,1,'')");
-
+            migrationBuilder.Sql("insert into Inyectoras values('150 ton') ");
+            migrationBuilder.Sql("insert into Inyectoras values('88 ton')");
+            migrationBuilder.Sql("insert into Inyectoras values('500 ton')");
+            migrationBuilder.Sql("insert into Inyectoras values('350 ton')");
+            migrationBuilder.Sql("insert into Inyectoras values('250 ton')");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

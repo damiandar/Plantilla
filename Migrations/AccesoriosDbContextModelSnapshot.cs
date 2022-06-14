@@ -205,9 +205,6 @@ namespace AccesoriosArgentinos.Migrations
                     b.Property<int?>("OperarioId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrdenProduccionCabecera_Id")
-                        .HasColumnType("int");
-
                     b.HasKey("PiezaId", "OrdenProduccionCabeceraId");
 
                     b.HasIndex("EstadoId");
@@ -216,7 +213,7 @@ namespace AccesoriosArgentinos.Migrations
 
                     b.HasIndex("OperarioId");
 
-                    b.HasIndex("OrdenProduccionCabecera_Id");
+                    b.HasIndex("OrdenProduccionCabeceraId");
 
                     b.ToTable("OrdenesProduccionDetalles");
                 });
@@ -348,7 +345,9 @@ namespace AccesoriosArgentinos.Migrations
 
                     b.HasOne("AccesoriosArgentinos.Modelos.OrdenesProduccionCabecera", "OrdenProduccionCabecera")
                         .WithMany("OrdenesProduccionDetalles")
-                        .HasForeignKey("OrdenProduccionCabecera_Id");
+                        .HasForeignKey("OrdenProduccionCabeceraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("AccesoriosArgentinos.Modelos.Pieza", "Pieza")
                         .WithMany("OrdenesProduccionDetalles")

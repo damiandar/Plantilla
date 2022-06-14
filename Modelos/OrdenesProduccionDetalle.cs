@@ -24,8 +24,12 @@ namespace AccesoriosArgentinos.Modelos
         public virtual EstadosProduccion Estado { get; set; }
         public virtual Matriz Matriz { get; set; }
         public virtual Operario Operario { get; set; }
-        [ForeignKey("OrdenProduccionCabecera_Id")]
         public virtual OrdenesProduccionCabecera OrdenProduccionCabecera { get; set; }
         public virtual Pieza Pieza { get; set; }
+
+        [NotMapped]
+        public int PesoTotal { get {
+                return Pieza.Peso * Cantidad;
+            } }
     }
 }

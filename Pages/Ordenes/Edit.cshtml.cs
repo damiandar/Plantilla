@@ -21,14 +21,15 @@ namespace AccesoriosArgentinos._Pages_Ordenes
 
         [BindProperty]
         public OrdenesProduccionCabecera OrdenesProduccionCabecera { get; set; }
-
+         
+         
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
+            ViewData["OrdenId"] = id; 
             OrdenesProduccionCabecera = await _context.OrdenesProduccionCabeceras
                 .Include(o => o.Inyectora).FirstOrDefaultAsync(m => m.Id == id);
 
@@ -37,7 +38,11 @@ namespace AccesoriosArgentinos._Pages_Ordenes
             {
                 return NotFound();
             }
-            var Items = _context.OrdenesProduccionDetalles.Where(x => x.OrdenProduccionCabeceraId == id).ToList();
+
+            var Items = _context.OrdenesProduccionDetalles
+                    .Include(x => x.Pieza)
+                        .ThenInclude(x => x.Material)
+                        .Where(x => x.OrdenProduccionCabeceraId == id).ToList();
             var Piezas = _context.Piezas.Where(x => x.InyectoraId == OrdenesProduccionCabecera.InyectoraId).ToList();
             ViewData["InyectoraId"] = new SelectList(_context.Inyectoras, "Id", "Id");
             ViewData["Items"] = Items;
@@ -46,6 +51,12 @@ namespace AccesoriosArgentinos._Pages_Ordenes
         }
 
         public void OnPostPieza(int codigo,int cantidad) {
+            /*int OrdenId = 0;
+            if (int.TryParse(ViewData["OrdenId"].ToString(), out int intValue)) {
+                OrdenId = intValue;
+            }*/
+   
+            
             var valor1 = codigo;
             var valor2 = cantidad;
 
@@ -53,11 +64,16 @@ namespace AccesoriosArgentinos._Pages_Ordenes
 
             var Item = new OrdenesProduccionDetalle();
             Item.Pieza = Pieza;
-
+            Item.OrdenProduccionCabeceraId = OrdenesProduccionCabecera.Id;
+            Item.Cantidad = cantidad;
             _context.OrdenesProduccionDetalles.Add(Item);
             _context.SaveChanges();
 
-            var Items = _context.OrdenesProduccionDetalles.Where(x => x.OrdenProduccionCabeceraId == OrdenesProduccionCabecera.Id).ToList();
+            var Items = _context.OrdenesProduccionDetalles
+                        .Include(x=>x.Pieza)
+                        .ThenInclude(x=>x.Material)
+                        .Where(x => x.OrdenProduccionCabeceraId == OrdenesProduccionCabecera.Id)
+                        .ToList();
             var Piezas = _context.Piezas.Where(x => x.InyectoraId == OrdenesProduccionCabecera.InyectoraId).ToList();
             ViewData["InyectoraId"] = new SelectList(_context.Inyectoras, "Id", "Id");
             ViewData["Items"] = Items;
