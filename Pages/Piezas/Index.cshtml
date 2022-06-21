@@ -36,35 +36,40 @@
                         <tbody>
                             @foreach (var item in Model.Pieza)
                             {
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user6">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.Codigo) - @Html.DisplayFor(modelItem => item.Peso)</h6>
-                                                <p class="text-xs text-secondary mb-0">@Html.DisplayFor(modelItem => item.Descripcion)</p>
-                                            </div>
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user6">
                                         </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">@Html.DisplayFor(modelItem => item.Material.Descripcion)</p>
-                                        <p class="text-xs text-secondary mb-0">@Html.DisplayFor(modelItem => item.Marca.Descripcion)</p>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm bg-gradient-secondary">@Html.DisplayFor(modelItem => item.CodigoFabricacion)</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">@Html.DisplayFor(modelItem => item.ProduccionPorHora) @Html.DisplayFor(modelItem => item.Matriz.Id)</span>
-                                    </td>
-                                    <td class="align-middle">
-                               
-                                        <a asp-page="./Edit"    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"  asp-route-id="@item.Id">Edit</a> |
-                                        <a asp-page="./Details" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"  asp-route-id="@item.Id">Details</a> |
-                                        <a asp-page="./Delete"  class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"  asp-route-id="@item.Id">Delete</a>
-                                    </td>
-                                </tr>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.Codigo) - @Html.DisplayFor(modelItem => item.Peso)</h6>
+                                            <p class="text-xs text-secondary mb-0">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">@Html.DisplayFor(modelItem => item.Material.Descripcion)</p>
+                                    <p class="text-xs text-secondary mb-0">@Html.DisplayFor(modelItem => item.Marca.Descripcion)</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-secondary">@Html.DisplayFor(modelItem => item.CodigoFabricacion)</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">@Html.DisplayFor(modelItem => item.ProduccionPorHora) @Html.DisplayFor(modelItem => item.Matriz.Id)</span>
+                                </td>
+                                <td class="align-middle">
+                                    <a asp-page="./Edit" asp-route-id="@item.Id">
+                                        <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Editar
+                                    </a> |
+                                    <a asp-page="./Delete" asp-route-id="@item.Id">
+                                        <i class="far fa-trash-alt me-2" aria-hidden="true"></i> Borrar
+                                    </a>|
+                                    <a asp-page="./Details" asp-route-id="@item.Id">
+                                        <i class="fas fa-file-pdf text-lg me-1" aria-hidden="true"></i>Imprimir
+                                    </a> 
+                                </td>
+                            </tr>
                                 
                             }
                         </tbody>

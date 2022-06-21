@@ -56,6 +56,12 @@ namespace AccesoriosArgentinos.Modelos
         public string Calefaccion { get; set; }
         public string NoyoA { get; set; }
         public string PosicionApertura { get; set; }
+         
+        [Display(Name = "Succión")]
+        public string Succion { get; set; }
+        
+        [Display(Name = "Posición de expulsor")]
+        public string PosicionExpulsor { get; set; }
         [Display(Name = "Producción por hora")] 
         public int ProduccionPorHora { get; set; }
 
@@ -65,6 +71,9 @@ namespace AccesoriosArgentinos.Modelos
         public virtual ICollection<MaterialPieza> MaterialPiezas { get; set; }
         public virtual ICollection<OrdenesProduccionDetalle> OrdenesProduccionDetalles { get; set; }
         public virtual Inyectora Inyectora { get; set; }
+
+     
+
         [NotMapped]
         public string FotoRuta {get;set;}
         [NotMapped]

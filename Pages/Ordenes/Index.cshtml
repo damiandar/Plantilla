@@ -16,7 +16,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.OrdenesProduccionCabecera[0].FechaCreacion)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.OrdenesProduccionCabecera[0].Inyectora)
             </th>
             <th></th>
@@ -26,15 +26,22 @@
 @foreach (var item in Model.OrdenesProduccionCabecera) {
         <tr>
             <td>
+                <i class="far fa-calendar-alt me-2" aria-hidden="true"></i>
                 @Html.DisplayFor(modelItem => item.FechaCreacion)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.Inyectora.Id)
             </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            <td class="text-center">
+                <a asp-page="./Edit" asp-route-id="@item.Id">
+                    <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Editar
+                </a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">
+                    <i class="far fa-trash-alt me-2" aria-hidden="true"></i> Borrar
+                </a>|
+                <a asp-page="./Details" asp-route-id="@item.Id">
+                    <i class="fas fa-file-pdf text-lg me-1" aria-hidden="true"></i>Imprimir
+                </a> 
             </td>
         </tr>
 }

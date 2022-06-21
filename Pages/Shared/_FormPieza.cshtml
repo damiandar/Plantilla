@@ -31,7 +31,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Pieza.MarcaId" class="control-label"></label>
-                <select asp-for="Pieza.MarcaId" class ="form-control" asp-items="Model.ListaMarcas">
+                <select asp-for="Pieza.MarcaId" class="form-control" asp-items="Model.ListaMarcas">
                 </select>
             </div>
             <div class="form-group">
@@ -46,15 +46,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Pieza.InyectoraId" class="control-label"></label>
-                <select asp-for="Pieza.InyectoraId" class ="form-control" asp-items="Model.ListaInyectoras">
-                    
+                <select asp-for="Pieza.InyectoraId" class="form-control" asp-items="Model.ListaInyectoras">
                 </select>
             </div>
             <div class="form-group">
                 <label asp-for="Pieza.MaterialId" class="control-label"></label>
-                
-                <select asp-for="Pieza.MaterialId" class ="form-control" asp-items="Model.ListaMateriales">
 
+                <select asp-for="Pieza.MaterialId" class="form-control" asp-items="Model.ListaMateriales">
                 </select>
             </div>
             <div class="form-group">
@@ -64,8 +62,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Pieza.MatrizId" class="control-label"></label>
-                  <select asp-for="Pieza.MatrizId" class ="form-control" asp-items="Model.ListaMatrices">
-
+                <select asp-for="Pieza.MatrizId" class="form-control" asp-items="Model.ListaMatrices">
                 </select>
             </div>
 
@@ -115,24 +112,34 @@
                 <span asp-validation-for="Pieza.NoyoA" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Pieza.PosicionExpulsor" class="control-label"></label>
+                <input asp-for="Pieza.PosicionExpulsor" class="form-control" />
+                <span asp-validation-for="Pieza.PosicionExpulsor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Pieza.PosicionApertura" class="control-label"></label>
                 <input asp-for="Pieza.PosicionApertura" class="form-control" />
                 <span asp-validation-for="Pieza.PosicionApertura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pieza.Succion" class="control-label"></label>
+                <input asp-for="Pieza.Succion" class="form-control" />
+                <span asp-validation-for="Pieza.Succion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Pieza.ProduccionPorHora" class="control-label"></label>
                 <input asp-for="Pieza.ProduccionPorHora" class="form-control" />
                 <span asp-validation-for="Pieza.ProduccionPorHora" class="text-danger"></span>
             </div>
-             <div class="form-group">
-                @Html.LabelFor(p=>p.Pieza.Foto)
+            <div class="form-group">
+                @Html.LabelFor(p => p.Pieza.Foto)
                 <div class="custom-file">
-                    @Html.TextBoxFor(p=>p.Pieza.Foto, new {type="file",@class="form-control custom-file-input"})
-                    @Html.LabelFor(p=>p.Pieza.Foto,"Seleccionar Foto",new { @class="custom-file-label"})
+                    @Html.TextBoxFor(p => p.Pieza.Foto, new { type = "file", @class = "form-control custom-file-input" })
+                    @Html.LabelFor(p => p.Pieza.Foto, "Seleccionar Foto", new { @class = "custom-file-label" })
                 </div>
             </div>
-   
-      
+
+
             <div class="form-group">
                 <input type="submit" value="Grabar" class="btn btn-primary" />
                 <a asp-page="./Index">Cancelar</a>

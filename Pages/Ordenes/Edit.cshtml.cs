@@ -38,28 +38,13 @@ namespace AccesoriosArgentinos._Pages_Ordenes
             {
                 return NotFound();
             }
-
-            var Items = _context.OrdenesProduccionDetalles
-                    .Include(x => x.Pieza)
-                        .ThenInclude(x => x.Material)
-                        .Where(x => x.OrdenProduccionCabeceraId == id).ToList();
-            var Piezas = _context.Piezas.Where(x => x.InyectoraId == OrdenesProduccionCabecera.InyectoraId).ToList();
-            ViewData["InyectoraId"] = new SelectList(_context.Inyectoras, "Id", "Id");
-            ViewData["Items"] = Items;
-            ViewData["Piezas"] = new SelectList(Piezas, "Id", "Descripcion");
+            LLenarPantalla((int)id);
             return Page();
         }
 
         public void OnPostPieza(int codigo,int cantidad) {
-            /*int OrdenId = 0;
-            if (int.TryParse(ViewData["OrdenId"].ToString(), out int intValue)) {
-                OrdenId = intValue;
-            }*/
-   
-            
             var valor1 = codigo;
             var valor2 = cantidad;
-
             var Pieza = _context.Piezas.Where(x => x.Id == codigo).First();
 
             var Item = new OrdenesProduccionDetalle();
@@ -69,15 +54,8 @@ namespace AccesoriosArgentinos._Pages_Ordenes
             _context.OrdenesProduccionDetalles.Add(Item);
             _context.SaveChanges();
 
-            var Items = _context.OrdenesProduccionDetalles
-                        .Include(x=>x.Pieza)
-                        .ThenInclude(x=>x.Material)
-                        .Where(x => x.OrdenProduccionCabeceraId == OrdenesProduccionCabecera.Id)
-                        .ToList();
-            var Piezas = _context.Piezas.Where(x => x.InyectoraId == OrdenesProduccionCabecera.InyectoraId).ToList();
-            ViewData["InyectoraId"] = new SelectList(_context.Inyectoras, "Id", "Id");
-            ViewData["Items"] = Items;
-            ViewData["Piezas"] = new SelectList(Piezas, "Id", "Descripcion");
+            LLenarPantalla(OrdenesProduccionCabecera.Id);
+
 
         }
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -106,13 +84,27 @@ namespace AccesoriosArgentinos._Pages_Ordenes
                     throw;
                 }
             }
-
+           
             return RedirectToPage("./Index");
         }
 
         private bool OrdenesProduccionCabeceraExists(int id)
         {
             return _context.OrdenesProduccionCabeceras.Any(e => e.Id == id);
+        }
+
+        private void LLenarPantalla(int id) {
+
+            var Items = _context.OrdenesProduccionDetalles
+                        .Include(x => x.Pieza)
+                        .ThenInclude(x => x.Material)
+                        .Where(x => x.OrdenProduccionCabeceraId == id)
+                        .ToList();
+            var Piezas = _context.Piezas.Where(x => x.InyectoraId == OrdenesProduccionCabecera.InyectoraId).ToList();
+            ViewData["InyectoraId"] = new SelectList(_context.Inyectoras, "Id", "Id");
+            ViewData["Items"] = Items;
+            ViewData["Piezas"] = new SelectList(Piezas, "Id", "Descripcion");
+
         }
     }
 }

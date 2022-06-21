@@ -317,6 +317,7 @@ namespace AccesoriosArgentinos.Migrations
             migrationBuilder.Sql("insert into Marcas (descripcion) values('Renault')");
             migrationBuilder.Sql("insert into Marcas (descripcion) values('Citroen')");
             migrationBuilder.Sql("insert into Marcas (descripcion) values('Dacia')");
+            migrationBuilder.Sql("insert into marcas values('VW')");
 
             migrationBuilder.Sql("insert into materiales (DESCRIPCION,CODIGO) values('PP C/30% FIBRA DE VIDRIO','PP 30%FV NEGRO')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP C/40% FIBRA DE VIDRIO','PP 40%FV NEGRO')");
@@ -324,6 +325,7 @@ namespace AccesoriosArgentinos.Migrations
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP SIN CARGA SD6200','PP G-11 NATURAL')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP NATURAL P/DEPOSITOS BOLSON X750KGS','PP GE 1200')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP/TD 10 NATURAL REC','PP/TD 10 NATURAL REC')");
+            migrationBuilder.Sql("insert into materiales (DESCRIPCION,CODIGO) values('PP/TD 20','PP/TD 20') ");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP C/20%TALCO X BOLSA 25KGS','PP/TD20 NAT. VIRGEN')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP C/20% TALCO X BOLSA 25KGS','PP/TD20 NEGRO VIRGEN')");
             migrationBuilder.Sql("insert into Materiales (DESCRIPCION,CODIGO) values('PP C/20%TALCO RECUP.X BOLSA 25KGS','PP/TD20 RG NEGRO')");

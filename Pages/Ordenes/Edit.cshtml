@@ -2,12 +2,12 @@
 @model AccesoriosArgentinos._Pages_Ordenes.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["SubTitle"] = "Editar"; 
+    ViewData["Title"] = "Ordenes";
 }
 
-<h1>Edit</h1>
 
-<h4>OrdenesProduccionCabecera</h4>
+<h4>Ordenes Produccion Cabecera</h4>
 <hr />
 <div class="row">
     <div  >
@@ -38,7 +38,7 @@
                         <input name="cantidad" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-primary" asp-page-handler="Pieza" />
+                        <input type="submit" value="Guardar" class="btn btn-primary" asp-page-handler="Pieza" />
                     </div>
 </form>
 
@@ -48,11 +48,11 @@
                     <th>
                         Pieza
                     </th>
-                    <th>
+                    <th class="text-center">
                         Cantidad
                     </th>
                     <th>Material</th>
-                    <th>Peso Total</th>
+                    <th class="text-center">Peso Total</th>
                     <th></th>
                 </tr>
             </thead>
@@ -63,17 +63,19 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Pieza.Descripcion)
                         </td>
-                        <td>
+                        <td class="text-center">
                             @Html.DisplayFor(modelItem => item.Cantidad)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Pieza.Material.Descripcion)
                         </td>
-                        <td>
+                        <td class="text-center">
                             @Html.DisplayFor(modelItem => item.PesoTotal)
                         </td>
-                        <td>
-                            <a asp-page="./Delete" asp-route-id="@item.PiezaId">Borrar</a>
+                        <td class="text-center">
+                            <a asp-page="./Delete" asp-route-id="@item.PiezaId">
+                                <i class="far fa-trash-alt me-2" aria-hidden="true"></i> Borrar
+                            </a> 
                         </td>
                     </tr>
                 }
@@ -86,6 +88,6 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a class="btn btn-outline-secondary" asp-page="./Index">Volver</a>
 </div>
 

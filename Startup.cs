@@ -8,7 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AccesoriosArgentinos.Modelos;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace AccesoriosArgentinos
 {
@@ -27,6 +28,8 @@ namespace AccesoriosArgentinos
             services.AddRazorPages();
             //services.AddDbContext<AccesoriosDbContext>(o => o.UseSqlite("Data source=AccArg.db"));
             services.AddDbContext<AccesoriosDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Cnx")));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
