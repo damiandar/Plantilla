@@ -5,89 +5,101 @@
     ViewData["SubTitle"] = "Editar"; 
     ViewData["Title"] = "Ordenes";
 }
-
-
-<h4>Ordenes Produccion Cabecera</h4>
-<hr />
 <div class="row">
-    <div  >
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="OrdenesProduccionCabecera.Id" />
-            <div class="form-group row">
-                <label asp-for="OrdenesProduccionCabecera.InyectoraId" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10">
-                    @Html.DisplayFor(model => model.OrdenesProduccionCabecera.Inyectora.Id, new { @class = "form-control-plaintext", @readonly = "readonly" })
+    <div class="col-12"> 
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h4>Ordenes Produccion Cabecera</h4>
+            </div> 
+            <div class="card-body px-0 pt-0 pb-2"> 
+                <div class="row">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="OrdenesProduccionCabecera.Id" />
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="OrdenesProduccionCabecera.InyectoraId"></label>
+                                @Html.DisplayFor(model => model.OrdenesProduccionCabecera.Inyectora.Id, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="OrdenesProduccionCabecera.FechaCreacion"></label>
+                                @Html.DisplayFor(model => model.OrdenesProduccionCabecera.FechaCreacion, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-row">
+                            <input type="hidden" id="hfPersonId" name="OrdenId" asp-for="OrdenesProduccionCabecera.Id" />
+                            <div class="form-group">
+                                <label class="control-label">Pieza</label>
+                                <div class="col-sm-6">
+                                    <select name="codigo" class="form-control" asp-items="ViewBag.Piezas"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Cantidad</label>
+                                <div class="col-sm-2">
+                                    <input name="cantidad" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Guardar" class="btn btn-primary" asp-page-handler="Pieza" />
+                        </div>
+                    </form>
                 </div>
-             </div>
-             <div class="form-group row">
-                <label asp-for="OrdenesProduccionCabecera.FechaCreacion" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10">
-                    @Html.DisplayFor(model => model.OrdenesProduccionCabecera.FechaCreacion, new { @class = "form-control-plaintext", @readonly = "readonly" })
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th>
+                                Pieza
+                            </th>
+                            <th>
+                                Matriz
+                            </th>
+                            <th class="text-center">
+                                Cantidad
+                            </th>
+                            <th>Material</th>
+                            <th class="text-center">Peso Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in (IEnumerable<AccesoriosArgentinos.Modelos.OrdenesProduccionDetalle>)ViewData["Items"])
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pieza.Descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pieza.MatrizId)
+                                    <b>(@Html.DisplayFor(modelItem => item.Pieza.Matriz.Deposito.DescripcionCorta))</b>
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Cantidad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pieza.Material.Descripcion)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.PesoTotal)
+                                </td>
+                                <td class="text-center">
+                                    <a asp-page="./Delete" asp-route-id="@item.PiezaId">
+                                        <i class="far fa-trash-alt me-2" aria-hidden="true"></i> Borrar
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                 
+                <div>
+                    <a class="btn btn-outline-secondary" asp-page="./Index">Volver</a>
                 </div>
-             </div>
-
-
-                    <input type="hidden" id="hfPersonId" name="OrdenId" asp-for="OrdenesProduccionCabecera.Id" />
-                    <div class="form-group">
-                        <label class="control-label">Pieza</label>
-                        <select name="codigo" class="form-control" asp-items="ViewBag.Piezas"></select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Cantidad</label>
-                        <input name="cantidad" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Guardar" class="btn btn-primary" asp-page-handler="Pieza" />
-                    </div>
-</form>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Pieza
-                    </th>
-                    <th class="text-center">
-                        Cantidad
-                    </th>
-                    <th>Material</th>
-                    <th class="text-center">Peso Total</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in (IEnumerable<AccesoriosArgentinos.Modelos.OrdenesProduccionDetalle>)ViewData["Items"])
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Pieza.Descripcion)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Cantidad)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Pieza.Material.Descripcion)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.PesoTotal)
-                        </td>
-                        <td class="text-center">
-                            <a asp-page="./Delete" asp-route-id="@item.PiezaId">
-                                <i class="far fa-trash-alt me-2" aria-hidden="true"></i> Borrar
-                            </a> 
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div>
-
+            </div>
+        </div>
     </div>
 </div>
-
-<div>
-    <a class="btn btn-outline-secondary" asp-page="./Index">Volver</a>
-</div>
-

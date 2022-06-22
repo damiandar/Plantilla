@@ -5,32 +5,37 @@
     ViewData["SubTitle"] = "Crear";
     ViewData["Title"] = "Orden";
 }
-
-<h1>Create</h1>
-
-<h4>OrdenesProduccionCabecera</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="OrdenesProduccionCabecera.InyectoraId" class="control-label"></label>
-                <select asp-for="OrdenesProduccionCabecera.InyectoraId" class ="form-control" asp-items="ViewBag.InyectoraId"></select>
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h4>Crear Orden de compra</h4>
+                <a asp-page="Create" class="btn btn-outline-secondary btn-sm mb-0 me-3">Crear Orden</a>
             </div>
-            <div class="form-group">
-                <label asp-for="OrdenesProduccionCabecera.FechaCreacion" class="control-label"></label>
-                <input asp-for="OrdenesProduccionCabecera.FechaCreacion" class="form-control" />
-                <span asp-validation-for="OrdenesProduccionCabecera.FechaCreacion" class="text-danger"></span>
+            <div class="card-body px-0 pt-0 pb-2">
+
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="OrdenesProduccionCabecera.InyectoraId" class="control-label"></label>
+                        <select asp-for="OrdenesProduccionCabecera.InyectoraId" class="form-control" asp-items="ViewBag.InyectoraId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OrdenesProduccionCabecera.FechaCreacion" class="control-label"></label>
+                        <input asp-for="OrdenesProduccionCabecera.FechaCreacion" class="form-control" />
+                        <span asp-validation-for="OrdenesProduccionCabecera.FechaCreacion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Crear" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div>
+                <a asp-page="Index">Volver</a>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Volver</a>
-</div>
+
 

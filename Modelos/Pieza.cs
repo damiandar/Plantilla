@@ -71,8 +71,12 @@ namespace AccesoriosArgentinos.Modelos
         public virtual ICollection<MaterialPieza> MaterialPiezas { get; set; }
         public virtual ICollection<OrdenesProduccionDetalle> OrdenesProduccionDetalles { get; set; }
         public virtual Inyectora Inyectora { get; set; }
-
-     
+        [NotMapped]
+        public string NombreCompleto {
+            get {
+                return this.Descripcion + "(Matriz Nº " + this.MatrizId + ")";
+            }
+        }
 
         [NotMapped]
         public string FotoRuta {get;set;}

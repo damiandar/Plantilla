@@ -28,8 +28,9 @@ namespace AccesoriosArgentinos.Modelos
         public virtual Pieza Pieza { get; set; }
 
         [NotMapped]
-        public int PesoTotal { get {
-                return Pieza.Peso * Cantidad;
+        public string PesoTotal { get {
+                double peso = Pieza.Peso * Cantidad;
+                return (peso/1000).ToString() + " Kgs" ;
             } }
     }
 }

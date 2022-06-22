@@ -17,6 +17,12 @@ namespace AccesoriosArgentinos.Modelos
         public int Id { get; set; }
         public string Descripcion { get; set; }
 
+        public string DescripcionCorta {
+            get {
+                return Descripcion.Substring(0, 2);
+            }
+        }
+
         public virtual ICollection<Matriz> Matrices { get; set; }
     }
 }

@@ -23,26 +23,26 @@ namespace AccesoriosArgentinos._Pages_Ordenes
         public OrdenesProduccionCabecera OrdenesProduccionCabecera { get; set; }
          
          
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
             ViewData["OrdenId"] = id; 
-            OrdenesProduccionCabecera = await _context.OrdenesProduccionCabeceras
-                .Include(o => o.Inyectora).FirstOrDefaultAsync(m => m.Id == id);
+    
+            LLenarPantalla((int)id);
 
-            
             if (OrdenesProduccionCabecera == null)
             {
                 return NotFound();
             }
-            LLenarPantalla((int)id);
+            
             return Page();
         }
 
-        public void OnPostPieza(int codigo,int cantidad) {
+        public IActionResult OnPostPieza(int codigo,int cantidad) {
+            //LLenarPantalla(OrdenesProduccionCabecera.Id);
             var valor1 = codigo;
             var valor2 = cantidad;
             var Pieza = _context.Piezas.Where(x => x.Id == codigo).First();
@@ -53,11 +53,43 @@ namespace AccesoriosArgentinos._Pages_Ordenes
             Item.Cantidad = cantidad;
             _context.OrdenesProduccionDetalles.Add(Item);
             _context.SaveChanges();
-
-            LLenarPantalla(OrdenesProduccionCabecera.Id);
+            return RedirectToPage("Edit", new { id = OrdenesProduccionCabecera.Id });
 
 
         }
+
+
+        private void LLenarPantalla(int id)
+        {
+            /*
+            var Items = _context.OrdenesProduccionDetalles
+                        .Include(x => x.Pieza)
+                        .ThenInclude(x => x.Material)
+                        .Where(x => x.OrdenProduccionCabeceraId == id)
+                        .ToList();
+            */
+            OrdenesProduccionCabecera = _context.OrdenesProduccionCabeceras
+                            .Include(o => o.Inyectora) 
+                            .Where(x => x.Id == id).First() ;
+             
+            var Items = _context.OrdenesProduccionDetalles 
+                            .Include(x => x.Pieza)
+                            .ThenInclude(x=>x.Matriz)
+                            .ThenInclude(x=>x.Deposito)
+                            .Include(x => x.Pieza)
+                            .ThenInclude(x => x.Material)
+                            .Where(x => x.OrdenProduccionCabeceraId == id)
+                            .ToList();
+           
+  
+            var Piezas = _context.Piezas.Where(x => x.InyectoraId == OrdenesProduccionCabecera.InyectoraId).ToList();
+            ViewData["InyectoraId"] = new SelectList(_context.Inyectoras, "Id", "Id");
+            ViewData["Items"] = Items;
+            ViewData["Piezas"] = new SelectList(Piezas, "Id", "NombreCompleto");
+
+        }
+
+
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -93,18 +125,5 @@ namespace AccesoriosArgentinos._Pages_Ordenes
             return _context.OrdenesProduccionCabeceras.Any(e => e.Id == id);
         }
 
-        private void LLenarPantalla(int id) {
-
-            var Items = _context.OrdenesProduccionDetalles
-                        .Include(x => x.Pieza)
-                        .ThenInclude(x => x.Material)
-                        .Where(x => x.OrdenProduccionCabeceraId == id)
-                        .ToList();
-            var Piezas = _context.Piezas.Where(x => x.InyectoraId == OrdenesProduccionCabecera.InyectoraId).ToList();
-            ViewData["InyectoraId"] = new SelectList(_context.Inyectoras, "Id", "Id");
-            ViewData["Items"] = Items;
-            ViewData["Piezas"] = new SelectList(Piezas, "Id", "Descripcion");
-
-        }
     }
 }

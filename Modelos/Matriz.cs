@@ -19,7 +19,7 @@ namespace AccesoriosArgentinos.Modelos
         public string Estado {get;set;}
         public string DepositoId { get; set; }
 
-        public virtual Deposito Deposito { get; set; }
+        public Deposito Deposito { get; set; }
         public virtual ICollection<OrdenesProduccionDetalle> OrdenesProduccionDetalles { get; set; }
         public virtual ICollection<Pieza> Piezas { get; set; }
     }
