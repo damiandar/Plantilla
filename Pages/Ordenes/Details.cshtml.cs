@@ -34,6 +34,15 @@ namespace AccesoriosArgentinos._Pages_Ordenes
             {
                 return NotFound();
             }
+            var Items = _context.OrdenesProduccionDetalles
+                 .Include(x => x.Pieza)
+                 .ThenInclude(x => x.Matriz)
+                 .ThenInclude(x => x.Deposito)
+                 .Include(x => x.Pieza)
+                 .ThenInclude(x => x.Material)
+                 .Where(x => x.OrdenProduccionCabeceraId == id)
+                 .ToList();
+            ViewData["Items"] = Items;
             return Page();
         }
     }

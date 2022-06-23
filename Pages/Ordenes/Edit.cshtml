@@ -2,22 +2,22 @@
 @model AccesoriosArgentinos._Pages_Ordenes.EditModel
 
 @{
-    ViewData["SubTitle"] = "Editar"; 
+    ViewData["SubTitle"] = "Editar";
     ViewData["Title"] = "Ordenes";
 }
 <div class="row">
-    <div class="col-12"> 
+    <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
                 <h4>Ordenes Produccion Cabecera</h4>
-            </div> 
-            <div class="card-body px-0 pt-0 pb-2"> 
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
                 <div class="row">
                     <form method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="OrdenesProduccionCabecera.Id" />
 
-                        <div class="form-row">
+                        <div style="padding: 10px;" class="row">
                             <div class="form-group col-md-6">
                                 <label asp-for="OrdenesProduccionCabecera.InyectoraId"></label>
                                 @Html.DisplayFor(model => model.OrdenesProduccionCabecera.Inyectora.Id, new { @class = "form-control", @readonly = "readonly" })
@@ -29,24 +29,25 @@
                         </div>
 
 
-                        <div class="form-row">
+                        <div style="margin: 15px; padding: 10px; border-radius: 20px; border: 1px solid" class="row">
                             <input type="hidden" id="hfPersonId" name="OrdenId" asp-for="OrdenesProduccionCabecera.Id" />
-                            <div class="form-group">
+                            <div class="col-sm-6">
                                 <label class="control-label">Pieza</label>
-                                <div class="col-sm-6">
+                                <div>
                                     <select name="codigo" class="form-control" asp-items="ViewBag.Piezas"></select>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="col-sm-3">
                                 <label class="control-label">Cantidad</label>
-                                <div class="col-sm-2">
+                                <div>
                                     <input name="cantidad" class="form-control" />
                                 </div>
                             </div>
+                            <div class="col-sm-3">
+                                <input type="submit" value="Guardar" class="btn btn-primary" asp-page-handler="Pieza" />
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="submit" value="Guardar" class="btn btn-primary" asp-page-handler="Pieza" />
-                        </div>
+
                     </form>
                 </div>
                 <table class="table align-items-center mb-0">
@@ -88,14 +89,14 @@
                                 </td>
                                 <td class="text-center">
                                     <a asp-page="./Delete" asp-route-id="@item.PiezaId">
-                                        <i class="far fa-trash-alt me-2" aria-hidden="true"></i> Borrar
+                                        <i class="far fa-trash-alt me-2" aria-hidden="true"></i> 
                                     </a>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
-                 
+
                 <div>
                     <a class="btn btn-outline-secondary" asp-page="./Index">Volver</a>
                 </div>
@@ -103,3 +104,83 @@
         </div>
     </div>
 </div>
+
+
+
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        function ImprimirPDF() {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            
+            // all coords and widths are in jsPDF instance's declared units
+            // 'inches' in this case
+            /*
+            // source can be HTML-formatted string, or a reference
+            // to an actual DOM element from which the text will be scraped.
+            source = $('table')[0];
+
+            // we support special element handlers. Register them with jQuery-style
+            // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+            // There is no support for any other type of selectors
+            // (class, of compound) at this time.
+            specialElementHandlers = {
+                // element with id of "bypass" - jQuery style selector
+                '#bypassme': function (element, renderer) {
+                    // true = "handled elsewhere, bypass text extraction"
+                    return true
+                }
+            };
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+            pdf.fromHTML(
+                source, // HTML string or DOM elem ref.
+                margins.left, // x coord
+                margins.top, { // y coord
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            },
+                          function (dispose) {
+                    // dispose: object with X, Y of the last line add to the PDF
+                    //          this allow the insertion of new lines after html
+                    pdf.save('Test.pdf');
+                }, margins);
+            */
+            pdf.autoTable({
+                html: 'table',
+                startY: 70,
+                theme: 'grid',
+                columnStyles: {
+                    0: {
+                        cellWidth: 200,
+                    },
+                    1: {
+                        cellWidth: 50,
+                    },
+                    2: {
+                        cellWidth: 60,
+                    },
+                    3: {
+                        cellWidth: 130,
+                    },
+                    4: {
+                        cellWidth: 0,
+                    },
+                },
+                styles: {
+                    minCellHeight: 20
+                }
+            });
+            pdf.save('OrdenDeCompra.pdf');
+
+
+        }
+    </script>
+} 

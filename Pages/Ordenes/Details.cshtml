@@ -5,27 +5,154 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h4>Ordenes Produccion Cabecera</h4>
+                <button onclick="javascript:ImprimirPDF();"><i class="fas fa-file-pdf text-lg me-1" aria-hidden="true"></i>Imprimir</button>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
 
-<div>
-    <h4>OrdenesProduccionCabecera</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OrdenesProduccionCabecera.FechaCreacion)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrdenesProduccionCabecera.FechaCreacion)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OrdenesProduccionCabecera.Inyectora)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrdenesProduccionCabecera.Inyectora.Id)
-        </dd>
-    </dl>
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.OrdenesProduccionCabecera.FechaCreacion)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.OrdenesProduccionCabecera.FechaCreacion)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.OrdenesProduccionCabecera.Inyectora)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.OrdenesProduccionCabecera.Inyectora.Id)
+                    </dd>
+                </dl>
+
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th>
+                                Pieza
+                            </th>
+                            <th>
+                                Matriz
+                            </th>
+                            <th class="text-center">
+                                Cantidad
+                            </th>
+                            <th>Material</th>
+                            <th class="text-center">Peso Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in (IEnumerable<AccesoriosArgentinos.Modelos.OrdenesProduccionDetalle>)ViewData["Items"])
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pieza.Descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pieza.MatrizId)
+                                    <b>(@Html.DisplayFor(modelItem => item.Pieza.Matriz.Deposito.DescripcionCorta))</b>
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Cantidad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pieza.Material.Descripcion)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.PesoTotal)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+            <div>
+                <a asp-page="./Edit" asp-route-id="@Model.OrdenesProduccionCabecera.Id">Edit</a> |
+                <a asp-page="./Index">Volver</a>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.OrdenesProduccionCabecera.Id">Edit</a> |
-    <a asp-page="./Index">Volver</a>
-</div>
+
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        function ImprimirPDF() {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+
+            // all coords and widths are in jsPDF instance's declared units
+            // 'inches' in this case
+            /*
+            // source can be HTML-formatted string, or a reference
+            // to an actual DOM element from which the text will be scraped.
+            source = $('table')[0];
+
+            // we support special element handlers. Register them with jQuery-style
+            // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+            // There is no support for any other type of selectors
+            // (class, of compound) at this time.
+            specialElementHandlers = {
+                // element with id of "bypass" - jQuery style selector
+                '#bypassme': function (element, renderer) {
+                    // true = "handled elsewhere, bypass text extraction"
+                    return true
+                }
+            };
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+            pdf.fromHTML(
+                source, // HTML string or DOM elem ref.
+                margins.left, // x coord
+                margins.top, { // y coord
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            },
+                          function (dispose) {
+                    // dispose: object with X, Y of the last line add to the PDF
+                    //          this allow the insertion of new lines after html
+                    pdf.save('Test.pdf');
+                }, margins);
+            */
+            pdf.autoTable({
+                html: 'table',
+                startY: 70,
+                theme: 'grid',
+                columnStyles: {
+                    0: {
+                        cellWidth: 200,
+                    },
+                    1: {
+                        cellWidth: 50,
+                    },
+                    2: {
+                        cellWidth: 60,
+                    },
+                    3: {
+                        cellWidth: 130,
+                    },
+                    4: {
+                        cellWidth: 0,
+                    },
+                },
+                styles: {
+                    minCellHeight: 20
+                }
+            });
+            pdf.save('OrdenDeCompra.pdf');
+
+
+        }
+    </script>
+} 
