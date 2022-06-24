@@ -103,10 +103,10 @@
             @Html.DisplayFor(model => model.Pieza.Marca.Id)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pieza.Material)
+            
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pieza.Material.Id)
+            @Html.DisplayFor(model => model.Pieza.MaterialPiezas.First().Material.Id)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Pieza.Matriz)

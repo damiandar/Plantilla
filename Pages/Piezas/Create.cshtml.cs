@@ -15,7 +15,8 @@ namespace AccesoriosArgentinos._Pages_Piezas
     {
         [BindProperty]
         public PiezaVM PiezaVM { get; set; }
-
+        [BindProperty]
+        public int MaterialId {get;set;}
         private readonly AccesoriosArgentinos.Modelos.AccesoriosDbContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
         

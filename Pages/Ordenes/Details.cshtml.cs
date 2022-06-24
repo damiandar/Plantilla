@@ -39,7 +39,7 @@ namespace AccesoriosArgentinos._Pages_Ordenes
                  .ThenInclude(x => x.Matriz)
                  .ThenInclude(x => x.Deposito)
                  .Include(x => x.Pieza)
-                 .ThenInclude(x => x.Material)
+                 .ThenInclude(x => x.MaterialPiezas)
                  .Where(x => x.OrdenProduccionCabeceraId == id)
                  .ToList();
             ViewData["Items"] = Items;

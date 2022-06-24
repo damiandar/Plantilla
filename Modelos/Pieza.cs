@@ -11,7 +11,7 @@ namespace AccesoriosArgentinos.Modelos
 {
     public class PiezaVM {
         public Pieza Pieza {get;set;}
-        
+        public int MaterialId{get;set;}
         public SelectList ListaMarcas{get;set;}
        
         public SelectList ListaMateriales {get;set;}
@@ -27,6 +27,7 @@ namespace AccesoriosArgentinos.Modelos
         {
             MaterialPiezas = new HashSet<MaterialPieza>();
             OrdenesProduccionDetalles = new HashSet<OrdenesProduccionDetalle>();
+            
         }
         [Key]
         public int Id{get;set;}
@@ -66,7 +67,6 @@ namespace AccesoriosArgentinos.Modelos
         public int ProduccionPorHora { get; set; }
 
         public virtual Marca Marca { get; set; }
-        public virtual Material Material { get; set; }
         public virtual Matriz Matriz { get; set; }
         public virtual ICollection<MaterialPieza> MaterialPiezas { get; set; }
         public virtual ICollection<OrdenesProduccionDetalle> OrdenesProduccionDetalles { get; set; }

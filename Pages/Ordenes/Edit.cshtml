@@ -82,7 +82,7 @@
                                     @Html.DisplayFor(modelItem => item.Cantidad)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Pieza.Material.Descripcion)
+                                    @Html.DisplayFor(modelItem => item.Pieza.MaterialPiezas.First().Material.Descripcion)
                                 </td>
                                 <td class="text-center">
                                     @Html.DisplayFor(modelItem => item.PesoTotal)

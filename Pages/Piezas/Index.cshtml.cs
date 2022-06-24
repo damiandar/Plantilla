@@ -24,7 +24,7 @@ namespace AccesoriosArgentinos._Pages_Piezas
         {
             Pieza = await _context.Piezas
                 .Include(p => p.Marca)
-                .Include(p => p.Material)
+                .Include(p => p.MaterialPiezas)
                 .Include(p => p.Matriz).ToListAsync();
         }
     }
